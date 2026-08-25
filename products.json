@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Cheeseburger",
+        "category": "Burger",
+        "description": "Dana eti, cheddar peyniri ve özel sos.",
+        "price": 350,
+        "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+        "active": true,
+        "featured": true
+    },
+    {
+        "id": 2,
+        "name": "Margherita Pizza",
+        "category": "Pizza",
+        "description": "Domates sosu, mozzarella ve fesleğen.",
+        "price": 300,
+        "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
+        "active": true,
+        "featured": true
+    },
+    {
+        "id": 3,
+        "name": "Izgara Tavuk",
+        "category": "Ana Yemek",
+        "description": "Izgara tavuk, patates ve özel sos.",
+        "price": 420,
+        "image": "https://images.unsplash.com/photo-1532550907401-a500c9a57435",
+        "active": true,
+        "featured": false
+    },
+    {
+        "id": 4,
+        "name": "Sezar Salata",
+        "category": "Salata",
+        "description": "Marul, parmesan, kruton ve Sezar sos.",
+        "price": 250,
+        "image": "https://images.unsplash.com/photo-1546793665-c74683f339c1",
+        "active": true,
+        "featured": false
+    },
+    {
+        "id": 5,
+        "name": "San Sebastian",
+        "category": "Tatlı",
+        "description": "Kremamsı dokulu özel San Sebastian cheesecake.",
+        "price": 220,
+        "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187",
+        "active": true,
+        "featured": true
+    },
+    {
+        "id": 6,
+        "name": "Cola",
+        "category": "İçecek",
+        "description": "Soğuk servis edilir.",
+        "price": 90,
+        "image": "https://images.unsplash.com/photo-1629203851122-3726ecdf080e",
+        "active": true,
+        "featured": false
+    }
+]
