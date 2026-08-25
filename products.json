@@ -58,5 +58,15 @@
         "image": "https://images.unsplash.com/photo-1629203851122-3726ecdf080e",
         "active": true,
         "featured": false
+    },
+    {
+        "id": 7,
+        "name": "kurtulus burger",
+        "category": "Burger",
+        "description": "specialll",
+        "price": 41,
+        "image": "www.google.com",
+        "active": true,
+        "featured": false
     }
 ]
