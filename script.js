@@ -1,122 +1,75 @@
 let allProducts = [];
-let currentProducts = [];
 
 
 /* =========================================================
-   PRODUCTS LOAD
+   ÜRÜNLERİ YÜKLE
 ========================================================= */
 
-async function loadProducts() {
-
-    try {
-
-        const response = await fetch(
-            "products.json?t=" + Date.now()
-        );
+fetch("products.json?t=" + Date.now())
+    .then(response => {
 
         if (!response.ok) {
             throw new Error("products.json yüklenemedi.");
         }
 
-        allProducts = await response.json();
+        return response.json();
+
+    })
+    .then(products => {
+
+        // Sadece aktif ürünler
+        allProducts = products.filter(
+            product => product.active === true
+        );
 
         displayProducts(allProducts);
 
-        createCategories(allProducts);
+    })
+    .catch(error => {
 
-    } catch (error) {
+        console.error("Menü yüklenemedi:", error);
 
-        console.error(error);
+        const container =
+            document.getElementById("products");
 
-        const menu =
-            document.getElementById("menu");
+        if (container) {
 
-        if (menu) {
-
-            menu.innerHTML = `
-                <p style="text-align:center;">
+            container.innerHTML = `
+                <p style="
+                    text-align:center;
+                    padding:30px;
+                    color:#a88418;
+                    font-size:18px;
+                ">
                     Menü yüklenemedi.
                 </p>
             `;
 
         }
 
-    }
-
-}
+    });
 
 
 /* =========================================================
-   DISPLAY PRODUCTS
+   ÜRÜNLERİ GÖSTER
 ========================================================= */
 
 function displayProducts(products) {
 
-    currentProducts = products;
+    const container =
+        document.getElementById("products");
 
-    const menu =
-        document.getElementById("menu");
+    if (!container) {
+        return;
+    }
 
-    if (!menu) return;
-
-    menu.innerHTML = "";
-
-    const categories = [
-        ...new Set(
-            products.map(
-                product => product.category
-            )
-        )
-    ];
+    container.innerHTML = "";
 
 
-    categories.forEach(category => {
+    products.forEach(product => {
 
-        const categoryProducts =
-            products.filter(
-                product =>
-                    product.category === category &&
-                    product.active === true
-            );
-
-
-        if (categoryProducts.length === 0) {
-            return;
-        }
-
-
-        const categorySection =
-            document.createElement("section");
-
-
-        categorySection.innerHTML = `
-
-            <h2>
-                ${escapeHtml(category)}
-            </h2>
-
-            <div class="product-grid"></div>
-
-        `;
-
-
-        const grid =
-            categorySection.querySelector(
-                ".product-grid"
-            );
-
-
-        categoryProducts.forEach(product => {
-
-            grid.innerHTML +=
-                createProductHTML(product);
-
-        });
-
-
-        menu.appendChild(
-            categorySection
-        );
+        container.innerHTML +=
+            createProductHTML(product);
 
     });
 
@@ -124,20 +77,27 @@ function displayProducts(products) {
 
 
 /* =========================================================
-   CREATE PRODUCT CARD
+   ÜRÜN KARTI
 ========================================================= */
 
 function createProductHTML(product) {
 
     return `
 
-        <article
+        <div
             class="product"
-            data-product-id="${product.id}"
-            onclick="openProductModal(${product.id})">
+            onclick="openProductModal(${product.id})"
+            role="button"
+            tabindex="0"
+            onkeydown="
+                if(event.key === 'Enter' || event.key === ' ') {
+                    openProductModal(${product.id});
+                }
+            "
+        >
 
             <img
-                src="${escapeHtml(product.image || "")}"
+                src="${escapeHtml(product.image)}"
                 alt="${escapeHtml(product.name)}"
                 loading="lazy"
             >
@@ -149,7 +109,7 @@ function createProductHTML(product) {
                 </div>
 
                 <div class="product-description">
-                    ${escapeHtml(product.description || "")}
+                    ${escapeHtml(product.description)}
                 </div>
 
                 <div class="product-price">
@@ -158,7 +118,7 @@ function createProductHTML(product) {
 
             </div>
 
-        </article>
+        </div>
 
     `;
 
@@ -166,75 +126,34 @@ function createProductHTML(product) {
 
 
 /* =========================================================
-   CATEGORIES
+   KATEGORİ FİLTRELEME
 ========================================================= */
 
-function createCategories(products) {
+function filterProducts(category) {
 
-    const categoryContainer =
-        document.getElementById("categories");
+    if (category === "all") {
 
-    if (!categoryContainer) return;
+        displayProducts(allProducts);
 
-    categoryContainer.innerHTML = "";
+        return;
 
-    const categories = [
-        "Tümü",
-        ...new Set(
-            products
-                .filter(product => product.active === true)
-                .map(product => product.category)
-        )
-    ];
+    }
 
 
-    categories.forEach(category => {
-
-        const button =
-            document.createElement("button");
-
-
-        button.textContent =
-            category;
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                if (category === "Tümü") {
-
-                    displayProducts(
-                        allProducts
-                    );
-
-                } else {
-
-                    displayProducts(
-                        allProducts.filter(
-                            product =>
-                                product.category === category &&
-                                product.active === true
-                        )
-                    );
-
-                }
-
-            }
+    const filtered =
+        allProducts.filter(
+            product =>
+                product.category === category
         );
 
 
-        categoryContainer.appendChild(
-            button
-        );
-
-    });
+    displayProducts(filtered);
 
 }
 
 
 /* =========================================================
-   OPEN PRODUCT MODAL
+   PRODUCT POPUP AÇ
 ========================================================= */
 
 function openProductModal(productId) {
@@ -252,54 +171,58 @@ function openProductModal(productId) {
     }
 
 
-    document.getElementById(
-        "modalProductImage"
-    ).src =
-        product.image || "";
+    const modal =
+        document.getElementById("productModal");
+
+    const image =
+        document.getElementById("modalProductImage");
+
+    const name =
+        document.getElementById("modalProductName");
+
+    const category =
+        document.getElementById("modalProductCategory");
+
+    const description =
+        document.getElementById("modalProductDescription");
+
+    const price =
+        document.getElementById("modalProductPrice");
 
 
-    document.getElementById(
-        "modalProductImage"
-    ).alt =
+    if (!modal) {
+        return;
+    }
+
+
+    image.src =
+        product.image;
+
+    image.alt =
         product.name;
 
 
-    document.getElementById(
-        "modalProductName"
-    ).textContent =
+    name.textContent =
         product.name;
 
 
-    document.getElementById(
-        "modalProductCategory"
-    ).textContent =
+    category.textContent =
         product.category;
 
 
-    document.getElementById(
-        "modalProductDescription"
-    ).textContent =
+    description.textContent =
         product.description || "";
 
 
-    document.getElementById(
-        "modalProductPrice"
-    ).textContent =
-        Number(
-            product.price
-        ).toLocaleString(
-            "tr-TR"
-        ) + " ₺";
-
-
-    const modal =
-        document.getElementById(
-            "productModal"
-        );
+    price.textContent =
+        Number(product.price).toLocaleString("tr-TR")
+        + " ₺";
 
 
     modal.classList.add("show");
 
+
+    // Arka sayfanın kaymasını engelle
     document.body.style.overflow =
         "hidden";
 
@@ -307,18 +230,22 @@ function openProductModal(productId) {
 
 
 /* =========================================================
-   CLOSE PRODUCT MODAL
+   PRODUCT POPUP KAPAT
 ========================================================= */
 
 function closeProductModal() {
 
     const modal =
-        document.getElementById(
-            "productModal"
-        );
+        document.getElementById("productModal");
+
+
+    if (!modal) {
+        return;
+    }
 
 
     modal.classList.remove("show");
+
 
     document.body.style.overflow =
         "";
@@ -327,12 +254,16 @@ function closeProductModal() {
 
 
 /* =========================================================
-   CLOSE BUTTON
+   POPUP EVENTLERİ
 ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    function () {
+
+        const modal =
+            document.getElementById("productModal");
+
 
         const closeButton =
             document.getElementById(
@@ -340,6 +271,7 @@ document.addEventListener(
             );
 
 
+        // X butonu
         if (closeButton) {
 
             closeButton.addEventListener(
@@ -350,17 +282,12 @@ document.addEventListener(
         }
 
 
-        const modal =
-            document.getElementById(
-                "productModal"
-            );
-
-
+        // Popup dışına tıklayınca kapat
         if (modal) {
 
             modal.addEventListener(
                 "click",
-                event => {
+                function (event) {
 
                     if (
                         event.target === modal
@@ -376,9 +303,10 @@ document.addEventListener(
         }
 
 
+        // ESC ile kapat
         document.addEventListener(
             "keydown",
-            event => {
+            function (event) {
 
                 if (
                     event.key === "Escape"
@@ -396,14 +324,12 @@ document.addEventListener(
 
 
 /* =========================================================
-   HTML SECURITY
+   HTML GÜVENLİĞİ
 ========================================================= */
 
 function escapeHtml(value) {
 
-    return String(
-        value ?? ""
-    )
+    return String(value ?? "")
 
         .replaceAll(
             "&",
@@ -431,10 +357,3 @@ function escapeHtml(value) {
         );
 
 }
-
-
-/* =========================================================
-   START
-========================================================= */
-
-loadProducts();
