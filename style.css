@@ -7,12 +7,15 @@
 :root {
     --gold: #c9a227;
     --gold-dark: #a88418;
-    --gold-light: #eadb9a;
+    --gold-light: #e5d49a;
+
     --cream: #faf9f5;
     --white: #ffffff;
+
     --text: #2f2b25;
-    --muted: #857f73;
-    --border: #e9e2cf;
+    --muted: #817b70;
+
+    --border: #e5dcc4;
 }
 
 /* =========================
@@ -22,7 +25,9 @@
 body {
     background: var(--cream);
     color: var(--text);
+
     font-family: "Times New Roman", Times, serif;
+
     min-height: 100vh;
 }
 
@@ -33,49 +38,48 @@ body {
 
 .header {
     background: var(--white);
+
     text-align: center;
-    padding: 42px 20px 32px;
+
+    padding: 34px 15px 26px;
 
     border-bottom: 1px solid var(--gold-light);
-
-    position: relative;
-}
-
-.header::after {
-    content: "";
-    display: block;
-
-    width: 70px;
-    height: 2px;
-
-    background: var(--gold);
-
-    margin: 18px auto 0;
 }
 
 .logo {
-    color: var(--text);
-
     font-family: "Times New Roman", Times, serif;
 
-    font-size: 36px;
+    font-size: 34px;
+
     font-weight: bold;
 
-    letter-spacing: 7px;
+    letter-spacing: 6px;
 
-    line-height: 1.1;
+    color: var(--text);
 }
 
 .subtitle {
-    color: var(--gold);
+    margin-top: 7px;
 
-    margin-top: 10px;
+    color: var(--gold-dark);
 
-    font-size: 16px;
-
-    letter-spacing: 5px;
+    font-size: 15px;
 
     font-weight: bold;
+
+    letter-spacing: 4px;
+}
+
+.header::after {
+    content: "✦";
+
+    display: block;
+
+    color: var(--gold);
+
+    font-size: 15px;
+
+    margin-top: 12px;
 }
 
 
@@ -86,46 +90,43 @@ body {
 .categories {
     display: flex;
 
-    overflow-x: auto;
+    justify-content: center;
 
-    gap: 10px;
+    flex-wrap: wrap;
 
-    padding: 16px 18px;
+    gap: 8px;
+
+    padding: 13px 15px;
+
+    background: var(--cream);
+
+    border-bottom: 1px solid var(--gold-light);
 
     position: sticky;
+
     top: 0;
 
-    background: rgba(250, 249, 245, 0.96);
-
-    backdrop-filter: blur(8px);
-
-    border-bottom: 1px solid var(--border);
-
     z-index: 10;
-
-    scrollbar-width: none;
-}
-
-.categories::-webkit-scrollbar {
-    display: none;
 }
 
 .categories button {
-    white-space: nowrap;
-
-    background: var(--white);
-
-    color: var(--text);
-
-    border: 1px solid var(--gold-light);
-
-    padding: 10px 19px;
-
-    border-radius: 999px;
-
     font-family: "Times New Roman", Times, serif;
 
-    font-size: 15px;
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 0.5px;
+
+    color: var(--gold);
+
+    background: #171510;
+
+    border: 1px solid var(--gold);
+
+    padding: 8px 16px;
+
+    border-radius: 6px;
 
     cursor: pointer;
 
@@ -133,55 +134,45 @@ body {
 }
 
 .categories button:hover {
-    border-color: var(--gold);
+    background: var(--gold);
 
-    color: var(--gold-dark);
-
-    background: #fffdf5;
-
-    transform: translateY(-1px);
+    color: #171510;
 }
 
-.categories button:focus {
-    outline: none;
-
-    border-color: var(--gold);
-
-    box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.12);
+.categories button:active {
+    transform: translateY(1px);
 }
 
 
 /* =========================
-   ANA ALAN
+   MAIN
 ========================= */
 
 main {
-    max-width: 1180px;
+    max-width: 1080px;
 
     margin: 0 auto;
 
-    padding: 30px 20px 50px;
+    padding: 22px 12px 45px;
 }
 
 
 /* =========================
-   BÖLÜM BAŞLIKLARI
+   MENÜ BAŞLIĞI
 ========================= */
 
 h2 {
-    position: relative;
-
-    color: var(--text);
-
-    font-size: 26px;
-
     text-align: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
 
     letter-spacing: 3px;
 
-    margin: 28px 0 22px;
+    margin: 15px 0 20px;
 
-    font-weight: bold;
+    color: var(--text);
 }
 
 h2::after {
@@ -189,11 +180,11 @@ h2::after {
 
     display: block;
 
+    margin-top: 6px;
+
     color: var(--gold);
 
-    font-size: 15px;
-
-    margin-top: 8px;
+    font-size: 13px;
 }
 
 
@@ -204,11 +195,11 @@ h2::after {
 .product-grid {
     display: grid;
 
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 
-    gap: 22px;
+    gap: 15px;
 
-    margin-bottom: 45px;
+    margin-bottom: 35px;
 }
 
 
@@ -221,26 +212,26 @@ h2::after {
 
     border: 1px solid var(--border);
 
-    border-radius: 14px;
+    border-radius: 10px;
 
     overflow: hidden;
 
     box-shadow:
-        0 5px 18px rgba(74, 61, 30, 0.06);
+        0 3px 10px rgba(70, 58, 30, 0.055);
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .product:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
 
     border-color: var(--gold-light);
 
     box-shadow:
-        0 12px 28px rgba(74, 61, 30, 0.11);
+        0 7px 18px rgba(70, 58, 30, 0.09);
 }
 
 
@@ -249,15 +240,15 @@ h2::after {
 ========================= */
 
 .product img {
+    display: block;
+
     width: 100%;
 
     aspect-ratio: 1 / 1;
 
     object-fit: cover;
 
-    display: block;
-
-    background: #f1eee5;
+    background: #f0ede4;
 }
 
 
@@ -266,59 +257,43 @@ h2::after {
 ========================= */
 
 .product-info {
-    padding: 17px 17px 19px;
+    padding: 12px 13px 14px;
 }
 
 .product-name {
-    color: var(--text);
-
-    font-size: 20px;
+    font-size: 18px;
 
     font-weight: bold;
 
     line-height: 1.2;
+
+    color: var(--text);
 }
 
 .product-description {
+    margin-top: 6px;
+
+    font-size: 13px;
+
+    line-height: 1.35;
+
     color: var(--muted);
 
-    font-size: 15px;
-
-    line-height: 1.45;
-
-    margin-top: 8px;
-
-    min-height: 42px;
+    min-height: 35px;
 }
 
 .product-price {
-    color: var(--gold-dark);
+    margin-top: 10px;
 
-    font-size: 20px;
-
-    font-weight: bold;
-
-    margin-top: 13px;
-
-    padding-top: 11px;
+    padding-top: 8px;
 
     border-top: 1px solid var(--border);
-}
 
+    color: var(--gold-dark);
 
-/* =========================
-   ÖNE ÇIKANLAR
-========================= */
+    font-size: 18px;
 
-.featured {
-    position: relative;
-}
-
-.featured .product {
-    border: 1px solid var(--gold-light);
-
-    box-shadow:
-        0 6px 24px rgba(201, 162, 39, 0.10);
+    font-weight: bold;
 }
 
 
@@ -327,27 +302,27 @@ h2::after {
 ========================= */
 
 footer {
-    text-align: center;
-
-    padding: 45px 20px 50px;
-
     background: var(--white);
 
     border-top: 1px solid var(--gold-light);
 
+    text-align: center;
+
+    padding: 32px 15px 38px;
+
     color: var(--text);
 
-    font-size: 17px;
+    font-size: 16px;
 }
 
 footer small {
     display: block;
 
-    margin-top: 9px;
+    margin-top: 7px;
 
     color: var(--gold-dark);
 
-    font-size: 15px;
+    font-size: 14px;
 
     font-style: italic;
 }
@@ -357,29 +332,16 @@ footer small {
    TABLET
 ========================= */
 
-@media (min-width: 700px) {
-
-    .product-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-}
-
-
-/* =========================
-   BÜYÜK EKRAN
-========================= */
-
-@media (min-width: 1100px) {
-
-    .logo {
-        font-size: 42px;
-    }
+@media (max-width: 850px) {
 
     main {
-        padding-top: 40px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 
@@ -387,81 +349,72 @@ footer small {
    MOBİL
 ========================= */
 
-@media (max-width: 699px) {
+@media (max-width: 600px) {
 
     .header {
-        padding: 30px 15px 25px;
+        padding: 27px 12px 22px;
     }
 
     .logo {
-        font-size: 29px;
-        letter-spacing: 5px;
-    }
+        font-size: 28px;
 
-    .subtitle {
-        font-size: 14px;
         letter-spacing: 4px;
     }
 
+    .subtitle {
+        font-size: 13px;
+
+        letter-spacing: 3px;
+    }
+
     .categories {
-        padding: 13px 14px;
+        justify-content: flex-start;
+
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        scrollbar-width: none;
+
+        padding: 10px;
+    }
+
+    .categories::-webkit-scrollbar {
+        display: none;
     }
 
     .categories button {
-        padding: 9px 15px;
-        font-size: 14px;
-    }
+        flex: 0 0 auto;
 
-    main {
-        padding: 20px 14px 35px;
-    }
+        padding: 7px 13px;
 
-    h2 {
-        font-size: 23px;
-        margin-top: 22px;
-    }
-
-    .product-grid {
-        gap: 15px;
-    }
-
-    .product-info {
-        padding: 13px;
-    }
-
-    .product-name {
-        font-size: 18px;
-    }
-
-    .product-description {
         font-size: 13px;
     }
 
-    .product-price {
-        font-size: 18px;
+    main {
+        padding: 17px 8px 35px;
     }
 
-}
+    h2 {
+        font-size: 22px;
 
+        margin-top: 10px;
 
-/* =========================
-   KÜÇÜK TELEFON
-========================= */
-
-@media (max-width: 420px) {
+        margin-bottom: 16px;
+    }
 
     .product-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
 
-        gap: 10px;
+        gap: 9px;
     }
 
     .product {
-        border-radius: 11px;
+        border-radius: 8px;
     }
 
     .product-info {
-        padding: 11px;
+        padding: 10px;
     }
 
     .product-name {
@@ -471,15 +424,42 @@ footer small {
     .product-description {
         font-size: 12px;
 
-        min-height: 36px;
+        min-height: 32px;
     }
 
     .product-price {
         font-size: 16px;
 
-        margin-top: 9px;
+        margin-top: 8px;
 
-        padding-top: 8px;
+        padding-top: 7px;
+    }
+}
+
+
+/* =========================
+   ÇOK KÜÇÜK EKRAN
+========================= */
+
+@media (max-width: 380px) {
+
+    .product-grid {
+        gap: 7px;
     }
 
+    .product-info {
+        padding: 8px;
+    }
+
+    .product-name {
+        font-size: 15px;
+    }
+
+    .product-description {
+        font-size: 11px;
+    }
+
+    .product-price {
+        font-size: 15px;
+    }
 }
