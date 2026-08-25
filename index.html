@@ -1,132 +1,198 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Restoran Menüsü</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <meta
+        name="description"
+        content="Restoran Menü"
+    >
+
+    <title>Restaurant Menu</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
-<!-- PRODUCT POPUP -->
-<div id="productModal" class="product-modal">
 
-    <div class="product-modal-content">
+<body>
 
-        <button
-            id="closeProductModal"
-            class="product-modal-close"
-            aria-label="Kapat">
-            &times;
-        </button>
 
-        <img
-            id="modalProductImage"
-            class="product-modal-image"
-            src=""
-            alt=""
-        >
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-        <div class="product-modal-info">
+    <header class="header">
 
-            <h2 id="modalProductName"></h2>
+        <div class="logo">
+            RESTAURANT
+        </div>
+
+        <div class="subtitle">
+            FINE DINING MENU
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         KATEGORİLER
+    ====================================================== -->
+
+    <nav
+        id="categories"
+        class="categories"
+        aria-label="Menü kategorileri"
+    >
+
+        <!-- Kategori butonlarını script.js oluşturacak -->
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         ANA MENÜ
+    ====================================================== -->
+
+    <main>
+
+        <section>
+
+            <h2>
+                MENÜ
+            </h2>
 
             <div
-                id="modalProductCategory"
-                class="product-modal-category">
+                id="products"
+                class="product-grid"
+            >
+
+                <!-- Ürünler script.js tarafından yüklenecek -->
+
             </div>
 
-            <p
-                id="modalProductDescription"
-                class="product-modal-description">
-            </p>
+        </section>
 
-            <div
-                id="modalProductPrice"
-                class="product-modal-price">
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div>
+            RESTAURANT
+        </div>
+
+        <small>
+            Afiyet olsun
+        </small>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         ÜRÜN POPUP
+    ====================================================== -->
+
+    <div
+        id="productModal"
+        class="product-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="product-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalProductName"
+        >
+
+            <!-- Kapatma butonu -->
+
+            <button
+                id="closeProductModal"
+                class="product-modal-close"
+                type="button"
+                aria-label="Ürünü kapat"
+            >
+
+                &times;
+
+            </button>
+
+
+
+            <!-- Ürün görseli -->
+
+            <img
+                id="modalProductImage"
+                class="product-modal-image"
+                src=""
+                alt=""
+            >
+
+
+
+            <!-- Ürün bilgileri -->
+
+            <div class="product-modal-info">
+
+                <h2 id="modalProductName">
+                </h2>
+
+
+                <div
+                    id="modalProductCategory"
+                    class="product-modal-category"
+                >
+                </div>
+
+
+                <p
+                    id="modalProductDescription"
+                    class="product-modal-description"
+                >
+                </p>
+
+
+                <div
+                    id="modalProductPrice"
+                    class="product-modal-price"
+                >
+                </div>
+
             </div>
 
         </div>
 
     </div>
 
-</div>
-    
-<body>
-
-<header class="header">
-
-    <div class="logo">
-        RESTAURANT
-    </div>
-
-    <div class="subtitle">
-        MENU
-    </div>
-
-</header>
 
 
-<nav class="categories">
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
-    <button onclick="filterProducts('all')">
-        TÜMÜ
-    </button>
+    <script src="script.js"></script>
 
-    <button onclick="filterProducts('Burger')">
-        BURGER
-    </button>
-
-    <button onclick="filterProducts('Pizza')">
-        PİZZA
-    </button>
-
-    <button onclick="filterProducts('Ana Yemek')">
-        ANA YEMEK
-    </button>
-
-    <button onclick="filterProducts('Salata')">
-        SALATA
-    </button>
-
-    <button onclick="filterProducts('Tatlı')">
-        TATLI
-    </button>
-
-    <button onclick="filterProducts('İçecek')">
-        İÇECEK
-    </button>
-
-</nav>
-
-
-<main>
-
-
-    <section>
-
-        <h2>MENÜ</h2>
-
-        <div id="products" class="product-grid"></div>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <div>RESTORANT MENÜ</div>
-
-    <small>
-        Afiyet olsun
-    </small>
-
-</footer>
-
-
-<script src="script.js"></script>
 
 </body>
+
 </html>
