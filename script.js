@@ -7,7 +7,6 @@ fetch("products.json")
         allProducts = products.filter(product => product.active);
 
         displayProducts(allProducts);
-        displayFeatured(allProducts);
 
     })
     .catch(error => {
@@ -24,23 +23,6 @@ function displayProducts(products) {
     container.innerHTML = "";
 
     products.forEach(product => {
-
-        container.innerHTML += createProductHTML(product);
-
-    });
-
-}
-
-
-function displayFeatured(products) {
-
-    const container = document.getElementById("featuredProducts");
-
-    container.innerHTML = "";
-
-    const featured = products.filter(product => product.featured);
-
-    featured.forEach(product => {
 
         container.innerHTML += createProductHTML(product);
 
