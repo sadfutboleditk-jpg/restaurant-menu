@@ -16,11 +16,18 @@
     --muted: #817b70;
 
     --border: #e5dcc4;
+
+    --black: #171510;
 }
 
-/* =========================
+
+/* =========================================================
    GENEL
-========================= */
+========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     background: var(--cream);
@@ -32,9 +39,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 .header {
     background: var(--white);
@@ -54,6 +61,8 @@ body {
     font-weight: bold;
 
     letter-spacing: 6px;
+
+    line-height: 1.15;
 
     color: var(--text);
 }
@@ -83,20 +92,22 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    KATEGORİLER
-========================= */
+========================================================= */
 
 .categories {
     display: flex;
 
     justify-content: center;
 
+    align-items: center;
+
     flex-wrap: wrap;
 
     gap: 8px;
 
-    padding: 13px 15px;
+    padding: 12px 10px;
 
     background: var(--cream);
 
@@ -120,7 +131,7 @@ body {
 
     color: var(--gold);
 
-    background: #171510;
+    background: var(--black);
 
     border: 1px solid var(--gold);
 
@@ -130,36 +141,47 @@ body {
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .categories button:hover {
     background: var(--gold);
 
-    color: #171510;
+    color: var(--black);
+
+    box-shadow:
+        0 3px 8px rgba(201, 162, 39, 0.18);
+
+    transform: translateY(-1px);
 }
 
 .categories button:active {
-    transform: translateY(1px);
+    transform: translateY(0);
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* =========================================================
+   ANA ALAN
+========================================================= */
 
 main {
-    max-width: 1080px;
+    width: 100%;
+
+    max-width: 1400px;
 
     margin: 0 auto;
 
-    padding: 22px 12px 45px;
+    padding: 20px 10px 45px;
 }
 
 
-/* =========================
-   MENÜ BAŞLIĞI
-========================= */
+/* =========================================================
+   BÖLÜM BAŞLIĞI
+========================================================= */
 
 h2 {
     text-align: center;
@@ -170,9 +192,9 @@ h2 {
 
     letter-spacing: 3px;
 
-    margin: 15px 0 20px;
-
     color: var(--text);
+
+    margin: 15px 0 20px;
 }
 
 h2::after {
@@ -188,14 +210,20 @@ h2::after {
 }
 
 
-/* =========================
+/* =========================================================
    ÜRÜN GRID
-========================= */
+========================================================= */
 
 .product-grid {
     display: grid;
 
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    /*
+       Kart minimum 220px.
+       Ekran genişledikçe mümkün olduğu kadar
+       fazla kart yan yana sığar.
+    */
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
 
     gap: 15px;
 
@@ -203,9 +231,9 @@ h2::after {
 }
 
 
-/* =========================
+/* =========================================================
    ÜRÜN KARTI
-========================= */
+========================================================= */
 
 .product {
     background: var(--white);
@@ -235,9 +263,9 @@ h2::after {
 }
 
 
-/* =========================
+/* =========================================================
    ÜRÜN GÖRSELİ
-========================= */
+========================================================= */
 
 .product img {
     display: block;
@@ -252,9 +280,9 @@ h2::after {
 }
 
 
-/* =========================
+/* =========================================================
    ÜRÜN BİLGİ
-========================= */
+========================================================= */
 
 .product-info {
     padding: 12px 13px 14px;
@@ -297,9 +325,9 @@ h2::after {
 }
 
 
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer {
     background: var(--white);
@@ -328,26 +356,25 @@ footer small {
 }
 
 
-/* =========================
-   TABLET
-========================= */
+/* =========================================================
+   TABLET / DAR EKRAN
+   Grid sütun sayısını burada SABİTLEMEYİZ.
+========================================================= */
 
 @media (max-width: 850px) {
 
     main {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 8px;
+
+        padding-right: 8px;
     }
 
-    .product-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
 }
 
 
-/* =========================
+/* =========================================================
    MOBİL
-========================= */
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -367,6 +394,8 @@ footer small {
         letter-spacing: 3px;
     }
 
+
+    /* Mobilde kategoriler yatay kaydırılabilir */
     .categories {
         justify-content: flex-start;
 
@@ -391,9 +420,11 @@ footer small {
         font-size: 13px;
     }
 
+
     main {
-        padding: 17px 8px 35px;
+        padding: 15px 6px 35px;
     }
+
 
     h2 {
         font-size: 22px;
@@ -403,29 +434,38 @@ footer small {
         margin-bottom: 16px;
     }
 
-    .product-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
 
+    /*
+       Grid burada da değiştirilmiyor.
+       auto-fit kendisi karar veriyor.
+    */
+
+    .product-grid {
         gap: 9px;
     }
+
 
     .product {
         border-radius: 8px;
     }
 
+
     .product-info {
         padding: 10px;
     }
 
+
     .product-name {
         font-size: 16px;
     }
+
 
     .product-description {
         font-size: 12px;
 
         min-height: 32px;
     }
+
 
     .product-price {
         font-size: 16px;
@@ -434,32 +474,53 @@ footer small {
 
         padding-top: 7px;
     }
+
 }
 
 
-/* =========================
-   ÇOK KÜÇÜK EKRAN
-========================= */
+/* =========================================================
+   ÇOK KÜÇÜK TELEFON
+========================================================= */
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
+
+    /*
+       220px minimum yerine telefonda kartların
+       iki sütuna sığabilmesi için minimum genişliği
+       biraz düşürüyoruz.
+    */
 
     .product-grid {
-        gap: 7px;
+        grid-template-columns:
+            repeat(auto-fit, minmax(160px, 1fr));
+
+        gap: 8px;
     }
 
-    .product-info {
-        padding: 8px;
+}
+
+
+/* =========================================================
+   EN KÜÇÜK EKRANLAR
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .product-grid {
+        grid-template-columns: 1fr;
     }
 
     .product-name {
-        font-size: 15px;
+        font-size: 17px;
     }
 
     .product-description {
-        font-size: 11px;
+        font-size: 13px;
     }
 
     .product-price {
-        font-size: 15px;
+        font-size: 17px;
     }
+
 }
+
