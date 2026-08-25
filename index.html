@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Restoran Menüsü</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        RESTAURANT
+    </div>
+
+    <div class="subtitle">
+        MENU
+    </div>
+
+</header>
+
+
+<nav class="categories">
+
+    <button onclick="filterProducts('all')">
+        TÜMÜ
+    </button>
+
+    <button onclick="filterProducts('Burger')">
+        BURGER
+    </button>
+
+    <button onclick="filterProducts('Pizza')">
+        PİZZA
+    </button>
+
+    <button onclick="filterProducts('Ana Yemek')">
+        ANA YEMEK
+    </button>
+
+    <button onclick="filterProducts('Salata')">
+        SALATA
+    </button>
+
+    <button onclick="filterProducts('Tatlı')">
+        TATLI
+    </button>
+
+    <button onclick="filterProducts('İçecek')">
+        İÇECEK
+    </button>
+
+</nav>
+
+
+<main>
+
+    <section class="featured">
+
+        <h2>ÖNE ÇIKANLAR</h2>
+
+        <div id="featuredProducts" class="product-grid"></div>
+
+    </section>
+
+
+    <section>
+
+        <h2>MENÜ</h2>
+
+        <div id="products" class="product-grid"></div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div>RESTORANT MENÜ</div>
+
+    <small>
+        Afiyet olsun
+    </small>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
