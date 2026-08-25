@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Restaurant Admin</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -20,10 +22,14 @@
         header {
             background: #111;
             color: #d4af37;
+
             padding: 18px 25px;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            gap: 15px;
         }
 
         header h1 {
@@ -32,7 +38,7 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1150px;
             margin: 30px auto;
             padding: 0 20px;
         }
@@ -41,8 +47,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             gap: 15px;
+
             margin-bottom: 20px;
+
             flex-wrap: wrap;
         }
 
@@ -53,15 +62,22 @@
         button {
             border: none;
             border-radius: 8px;
+
             padding: 10px 15px;
+
             cursor: pointer;
+
             font-size: 14px;
             font-weight: bold;
         }
 
+        button:hover {
+            opacity: .9;
+        }
+
         .btn-add {
             background: #111;
-            color: #fff;
+            color: white;
         }
 
         .btn-download {
@@ -76,12 +92,17 @@
 
         .btn-delete {
             background: #d9534f;
-            color: #fff;
+            color: white;
         }
 
         .btn-toggle {
             background: #5cb85c;
-            color: #fff;
+            color: white;
+        }
+
+        .btn-refresh {
+            background: #555;
+            color: white;
         }
 
         .product-list {
@@ -90,39 +111,54 @@
         }
 
         .product-card {
-            background: #fff;
+            background: white;
+
             border-radius: 12px;
+
             padding: 15px;
+
             display: grid;
+
             grid-template-columns: 90px 1fr auto;
+
             gap: 15px;
+
             align-items: center;
+
             box-shadow: 0 2px 10px rgba(0,0,0,.08);
         }
 
         .product-card img {
             width: 90px;
             height: 90px;
+
             border-radius: 10px;
+
             object-fit: cover;
+
             background: #eee;
         }
 
         .product-name {
             font-size: 18px;
+
             font-weight: bold;
+
             margin-bottom: 5px;
         }
 
         .product-meta {
             color: #777;
+
             font-size: 14px;
+
             margin-bottom: 5px;
         }
 
         .product-price {
-            font-weight: bold;
             font-size: 17px;
+
+            font-weight: bold;
         }
 
         .badges {
@@ -131,9 +167,13 @@
 
         .badge {
             display: inline-block;
+
             padding: 4px 8px;
+
             border-radius: 20px;
+
             font-size: 11px;
+
             margin-right: 4px;
         }
 
@@ -154,39 +194,73 @@
 
         .actions {
             display: flex;
+
             gap: 8px;
+
             flex-wrap: wrap;
+
             justify-content: flex-end;
         }
 
         .empty {
             background: white;
+
             padding: 30px;
+
             border-radius: 12px;
+
             text-align: center;
+
             color: #777;
         }
 
-        /* Modal */
+        .info-box {
+            background: #fff8df;
+
+            border: 1px solid #ecd77b;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+        /* MODAL */
 
         .modal {
             display: none;
+
             position: fixed;
+
             z-index: 9999;
+
             left: 0;
             top: 0;
+
             width: 100%;
             height: 100%;
+
             background: rgba(0,0,0,.6);
+
             padding: 20px;
+
             overflow-y: auto;
         }
 
         .modal-content {
-            background: #fff;
-            max-width: 600px;
+            background: white;
+
+            max-width: 700px;
+
             margin: 40px auto;
+
             padding: 25px;
+
             border-radius: 15px;
         }
 
@@ -200,34 +274,46 @@
 
         label {
             display: block;
+
             font-weight: bold;
+
             margin-bottom: 6px;
         }
 
         input,
         textarea {
             width: 100%;
+
             padding: 11px;
+
             border: 1px solid #ccc;
+
             border-radius: 8px;
+
             font-size: 15px;
         }
 
         textarea {
             min-height: 90px;
+
             resize: vertical;
         }
 
         .checkbox-row {
             display: flex;
+
             gap: 20px;
+
             flex-wrap: wrap;
         }
 
         .checkbox-row label {
             display: flex;
+
             align-items: center;
+
             gap: 7px;
+
             font-weight: normal;
         }
 
@@ -237,14 +323,17 @@
 
         .modal-actions {
             display: flex;
+
             gap: 10px;
+
             justify-content: flex-end;
+
             margin-top: 20px;
         }
 
         .btn-save {
             background: #111;
-            color: #fff;
+            color: white;
         }
 
         .btn-cancel {
@@ -252,17 +341,138 @@
             color: #111;
         }
 
-        .info-box {
-            background: #fff8df;
-            border: 1px solid #ecd77b;
-            padding: 15px;
+        /* IMAGE SELECTOR */
+
+        .image-section {
+            margin-top: 10px;
+        }
+
+        .image-current {
+            margin-bottom: 15px;
+
+            padding: 12px;
+
             border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            line-height: 1.5;
+
+            background: #f5f5f5;
+
+            border: 1px solid #ddd;
+        }
+
+        .current-image-preview {
+            width: 130px;
+            height: 130px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            display: block;
+
+            margin-top: 10px;
+
+            background: #ddd;
+        }
+
+        .image-gallery {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 12px;
+
+            margin-top: 12px;
+        }
+
+        .image-item {
+            border: 2px solid transparent;
+
+            border-radius: 10px;
+
+            padding: 5px;
+
+            cursor: pointer;
+
+            background: #f5f5f5;
+
+            transition: .15s;
+        }
+
+        .image-item:hover {
+            border-color: #aaa;
+        }
+
+        .image-item.selected {
+            border-color: #d4af37;
+
+            background: #fff9dc;
+        }
+
+        .image-item img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+
+            object-fit: cover;
+
+            border-radius: 7px;
+
+            display: block;
+        }
+
+        .image-name {
+            font-size: 11px;
+
+            margin-top: 5px;
+
+            text-align: center;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        .image-status {
+            margin-top: 10px;
+
+            color: #666;
+
+            font-size: 13px;
+        }
+
+        .no-images {
+            padding: 20px;
+
+            background: #f5f5f5;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            color: #777;
+        }
+
+        .selected-image-path {
+            background: #f7f7f7;
+
+            border: 1px solid #ddd;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            margin-top: 10px;
+
+            font-family: monospace;
+
+            font-size: 13px;
+
+            word-break: break-all;
         }
 
         @media (max-width: 700px) {
+
             .product-card {
                 grid-template-columns: 70px 1fr;
             }
@@ -274,139 +484,377 @@
 
             .actions {
                 grid-column: 1 / -1;
+
                 justify-content: flex-start;
             }
+
+            .image-gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
         }
+
+        @media (max-width: 450px) {
+
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
     </style>
+
 </head>
 
 <body>
 
+
 <header>
+
     <h1>Restaurant Admin</h1>
-    <button class="btn-download" onclick="downloadJSON()">
-        JSON'u İndir
-    </button>
+
+    <div style="display:flex; gap:10px;">
+
+        <button
+            class="btn-refresh"
+            onclick="loadImages(true)">
+            Görselleri Yenile
+        </button>
+
+        <button
+            class="btn-download"
+            onclick="downloadJSON()">
+            JSON'u İndir
+        </button>
+
+    </div>
+
 </header>
+
 
 <div class="container">
 
+
     <div class="info-box">
-        <strong>Nasıl kullanılır?</strong><br>
-        Ürünleri burada ekleyip, düzenleyip veya silebilirsin.
-        İşin bittiğinde <strong>JSON'u İndir</strong> butonuna bas.
-        İnen <strong>products.json</strong> dosyasını GitHub'daki mevcut
-        products.json ile değiştir. GitHub Pages daha sonra güncel menüyü yayınlar.
+
+        <strong>Nasıl kullanılır?</strong>
+
+        <br><br>
+
+        Ürünleri buradan ekleyebilir veya düzenleyebilirsin.
+
+        <br>
+
+        Görseller GitHub'daki
+        <strong>images/</strong>
+        klasöründen otomatik alınır.
+
+        <br>
+
+        Yeni bir fotoğraf eklediğinde önce GitHub'daki
+        <strong>images/</strong>
+        klasörüne yükle,
+        sonra <strong>Görselleri Yenile</strong> butonuna bas.
+
+        <br><br>
+
+        İşin bittiğinde
+        <strong>JSON'u İndir</strong>
+        butonuna bas ve oluşan
+        <strong>products.json</strong>
+        dosyasını GitHub'daki dosyayla değiştir.
+
     </div>
+
 
     <div class="top-bar">
+
         <h2>Ürünler</h2>
 
-        <button class="btn-add" onclick="openAddModal()">
+        <button
+            class="btn-add"
+            onclick="openAddModal()">
             + Yeni Ürün
         </button>
+
     </div>
 
-    <div id="productList" class="product-list"></div>
+
+    <div
+        id="productList"
+        class="product-list">
+    </div>
+
 
 </div>
 
-<!-- MODAL -->
 
-<div id="productModal" class="modal">
+<!-- PRODUCT MODAL -->
+
+<div
+    id="productModal"
+    class="modal">
+
+
     <div class="modal-content">
 
-        <h2 id="modalTitle">Yeni Ürün</h2>
 
-        <input type="hidden" id="productId">
+        <h2 id="modalTitle">
+            Yeni Ürün
+        </h2>
+
+
+        <input
+            type="hidden"
+            id="productId">
+
 
         <div class="form-group">
-            <label>Ürün Adı</label>
-            <input type="text" id="productName" placeholder="Örn. Cheeseburger">
+
+            <label>
+                Ürün Adı
+            </label>
+
+            <input
+                type="text"
+                id="productName"
+                placeholder="Örn. Cheeseburger">
+
         </div>
 
+
         <div class="form-group">
-            <label>Kategori</label>
-            <input type="text" id="productCategory" placeholder="Örn. Burger">
+
+            <label>
+                Kategori
+            </label>
+
+            <input
+                type="text"
+                id="productCategory"
+                placeholder="Örn. Burger">
+
         </div>
 
+
         <div class="form-group">
-            <label>Açıklama</label>
-            <textarea id="productDescription"
-                      placeholder="Ürün açıklaması"></textarea>
+
+            <label>
+                Açıklama
+            </label>
+
+            <textarea
+                id="productDescription"
+                placeholder="Ürün açıklaması">
+            </textarea>
+
         </div>
 
+
         <div class="form-group">
-            <label>Fiyat (₺)</label>
-            <input type="number" id="productPrice" min="0" step="1">
+
+            <label>
+                Fiyat (₺)
+            </label>
+
+            <input
+                type="number"
+                id="productPrice"
+                min="0"
+                step="1">
+
         </div>
 
-        <div class="form-group">
-            <label>Görsel URL</label>
-            <input type="url" id="productImage"
-                   placeholder="https://...">
-        </div>
+
+        <!-- IMAGE SELECTOR -->
 
         <div class="form-group">
-            <div class="checkbox-row">
 
-                <label>
-                    <input type="checkbox" id="productActive">
-                    Aktif
-                </label>
+            <label>
+                Ürün Görseli
+            </label>
 
-                <label>
-                    <input type="checkbox" id="productFeatured">
-                    Öne Çıkan
-                </label>
+
+            <div class="image-section">
+
+
+                <div class="image-current">
+
+                    <strong>
+                        Seçili Görsel
+                    </strong>
+
+
+                    <img
+                        id="currentImagePreview"
+                        class="current-image-preview"
+                        src=""
+                        alt="Seçili görsel"
+                        onerror="this.style.display='none'">
+
+
+                    <div
+                        id="selectedImagePath"
+                        class="selected-image-path">
+                        Henüz görsel seçilmedi.
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="imageStatus"
+                    class="image-status">
+
+                    Görseller yükleniyor...
+
+                </div>
+
+
+                <div
+                    id="imageGallery"
+                    class="image-gallery">
+                </div>
+
 
             </div>
+
         </div>
+
+
+        <div class="form-group">
+
+            <div class="checkbox-row">
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="productActive"
+                        checked>
+
+                    Aktif
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="productFeatured">
+
+                    Öne Çıkan
+
+                </label>
+
+
+            </div>
+
+        </div>
+
 
         <div class="modal-actions">
 
-            <button class="btn-cancel" onclick="closeModal()">
+
+            <button
+                class="btn-cancel"
+                onclick="closeModal()">
+
                 İptal
+
             </button>
 
-            <button class="btn-save" onclick="saveProduct()">
+
+            <button
+                class="btn-save"
+                onclick="saveProduct()">
+
                 Kaydet
+
             </button>
+
 
         </div>
 
+
     </div>
+
 </div>
+
 
 <script>
 
+
+    /* =========================================================
+       GLOBAL
+    ========================================================= */
+
     let products = [];
 
-    // JSON yükle
+    let images = [];
+
+    let selectedImage = "";
+
+
+    /* =========================================================
+       GITHUB AYARLARI
+    ========================================================= */
+
+    const GITHUB_API_IMAGES =
+        "https://api.github.com/repos/sadfutboleditk-jpg/restaurant-menu/contents/images";
+
+
+    const GITHUB_RAW_IMAGES =
+        "https://raw.githubusercontent.com/sadfutboleditk-jpg/restaurant-menu/main/images/";
+
+
+    /* =========================================================
+       PRODUCTS
+    ========================================================= */
+
     async function loadProducts() {
 
         try {
 
-            const response = await fetch(
-                "products.json?t=" + Date.now()
-            );
+            const response =
+                await fetch(
+                    "products.json?t=" + Date.now()
+                );
+
 
             if (!response.ok) {
-                throw new Error("products.json yüklenemedi.");
+
+                throw new Error(
+                    "products.json yüklenemedi."
+                );
+
             }
 
-            products = await response.json();
+
+            products =
+                await response.json();
+
 
             renderProducts();
+
 
         } catch (error) {
 
             console.error(error);
 
-            document.getElementById("productList").innerHTML = `
+
+            document.getElementById(
+                "productList"
+            ).innerHTML = `
+
                 <div class="empty">
+
                     products.json yüklenemedi.
+
                 </div>
+
             `;
 
         }
@@ -414,227 +862,808 @@
     }
 
 
-    // Ürünleri ekrana bas
+    /* =========================================================
+       GITHUB IMAGES
+    ========================================================= */
+
+    async function loadImages(showMessage = false) {
+
+        const status =
+            document.getElementById(
+                "imageStatus"
+            );
+
+
+        status.textContent =
+            "GitHub images/ klasörü okunuyor...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    GITHUB_API_IMAGES +
+                    "?t=" +
+                    Date.now()
+                );
+
+
+            if (!response.ok) {
+
+                if (response.status === 404) {
+
+                    images = [];
+
+                    renderImageGallery();
+
+                    status.innerHTML =
+                        "GitHub'da henüz <strong>images/</strong> klasörü yok. Önce bir görsel yükle.";
+
+                    return;
+
+                }
+
+
+                throw new Error(
+                    "GitHub görselleri okunamadı."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            images = data
+
+                .filter(
+                    item =>
+                        item.type === "file"
+                )
+
+                .filter(
+                    item => {
+
+                        const name =
+                            item.name.toLowerCase();
+
+                        return (
+                            name.endsWith(".jpg") ||
+                            name.endsWith(".jpeg") ||
+                            name.endsWith(".png") ||
+                            name.endsWith(".webp") ||
+                            name.endsWith(".gif")
+                        );
+
+                    }
+                )
+
+                .sort(
+                    (a, b) =>
+                        a.name.localeCompare(
+                            b.name,
+                            "tr"
+                        )
+                );
+
+
+            renderImageGallery();
+
+
+            status.textContent =
+                images.length +
+                " görsel bulundu.";
+
+
+            if (showMessage) {
+
+                alert(
+                    images.length +
+                    " görsel bulundu."
+                );
+
+            }
+
+
+        } catch (error) {
+
+            console.error(error);
+
+
+            images = [];
+
+            renderImageGallery();
+
+
+            status.innerHTML = `
+                Görseller yüklenemedi.
+                <br>
+                GitHub'daki
+                <strong>images/</strong>
+                klasörünü kontrol et.
+            `;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       IMAGE GALLERY
+    ========================================================= */
+
+    function renderImageGallery() {
+
+        const gallery =
+            document.getElementById(
+                "imageGallery"
+            );
+
+
+        if (images.length === 0) {
+
+            gallery.innerHTML = `
+
+                <div
+                    class="no-images"
+                    style="grid-column:1/-1">
+
+                    Henüz görsel bulunamadı.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        gallery.innerHTML =
+            images.map(
+                image => {
+
+                    const imagePath =
+                        "images/" +
+                        image.name;
+
+
+                    const rawUrl =
+                        GITHUB_RAW_IMAGES +
+                        encodeURIComponent(
+                            image.name
+                        );
+
+
+                    const selected =
+                        selectedImage ===
+                        imagePath
+                            ? "selected"
+                            : "";
+
+
+                    return `
+
+                        <div
+                            class="image-item ${selected}"
+                            onclick="selectImage(
+                                '${escapeJs(imagePath)}',
+                                '${escapeJs(rawUrl)}'
+                            )">
+
+                            <img
+                                src="${escapeHtml(rawUrl)}"
+                                alt="${escapeHtml(image.name)}"
+                                loading="lazy"
+                                onerror="this.style.opacity='.3'">
+
+                            <div class="image-name">
+
+                                ${escapeHtml(image.name)}
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+    /* =========================================================
+       SELECT IMAGE
+    ========================================================= */
+
+    function selectImage(
+        imagePath,
+        imageUrl
+    ) {
+
+        selectedImage =
+            imagePath;
+
+
+        const preview =
+            document.getElementById(
+                "currentImagePreview"
+            );
+
+
+        preview.src =
+            imageUrl;
+
+
+        preview.style.display =
+            "block";
+
+
+        document.getElementById(
+            "selectedImagePath"
+        ).textContent =
+            imagePath;
+
+
+        renderImageGallery();
+
+    }
+
+
+    /* =========================================================
+       RENDER PRODUCTS
+    ========================================================= */
+
     function renderProducts() {
 
-        const container = document.getElementById("productList");
+        const container =
+            document.getElementById(
+                "productList"
+            );
+
 
         if (products.length === 0) {
 
             container.innerHTML = `
+
                 <div class="empty">
+
                     Henüz ürün yok.
+
                 </div>
+
             `;
 
             return;
+
         }
 
-        container.innerHTML = products.map(product => {
 
-            return `
-                <div class="product-card">
+        container.innerHTML =
+            products.map(
+                product => {
 
-                    <img
-                        src="${escapeHtml(product.image)}"
-                        alt="${escapeHtml(product.name)}"
-                        onerror="this.src='https://via.placeholder.com/90'"
-                    >
+                    return `
 
-                    <div>
+                        <div class="product-card">
 
-                        <div class="product-name">
-                            ${escapeHtml(product.name)}
+                            <img
+                                src="${escapeHtml(product.image || "")}"
+                                alt="${escapeHtml(product.name)}"
+                                onerror="this.src='https://via.placeholder.com/90'">
+
+                            <div>
+
+                                <div class="product-name">
+
+                                    ${escapeHtml(product.name)}
+
+                                </div>
+
+
+                                <div class="product-meta">
+
+                                    ${escapeHtml(product.category)}
+
+                                </div>
+
+
+                                <div class="product-meta">
+
+                                    ${escapeHtml(product.description)}
+
+                                </div>
+
+
+                                <div class="product-price">
+
+                                    ${Number(
+                                        product.price
+                                    ).toLocaleString(
+                                        "tr-TR"
+                                    )} ₺
+
+                                </div>
+
+
+                                <div class="badges">
+
+
+                                    ${
+                                        product.active
+
+                                        ? `
+                                            <span
+                                                class="badge badge-active">
+
+                                                AKTİF
+
+                                            </span>
+                                        `
+
+                                        : `
+                                            <span
+                                                class="badge badge-passive">
+
+                                                PASİF
+
+                                            </span>
+                                        `
+                                    }
+
+
+                                    ${
+                                        product.featured
+
+                                        ? `
+                                            <span
+                                                class="badge badge-featured">
+
+                                                ÖNE ÇIKAN
+
+                                            </span>
+                                        `
+
+                                        : ""
+
+                                    }
+
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="actions">
+
+
+                                <button
+                                    class="btn-edit"
+                                    onclick="editProduct(${product.id})">
+
+                                    Düzenle
+
+                                </button>
+
+
+                                <button
+                                    class="btn-toggle"
+                                    onclick="toggleActive(${product.id})">
+
+                                    ${
+                                        product.active
+                                            ? "Pasif Yap"
+                                            : "Aktif Yap"
+                                    }
+
+                                </button>
+
+
+                                <button
+                                    class="btn-delete"
+                                    onclick="deleteProduct(${product.id})">
+
+                                    Sil
+
+                                </button>
+
+
+                            </div>
+
+
                         </div>
 
-                        <div class="product-meta">
-                            ${escapeHtml(product.category)}
-                        </div>
+                    `;
 
-                        <div class="product-meta">
-                            ${escapeHtml(product.description)}
-                        </div>
-
-                        <div class="product-price">
-                            ${Number(product.price).toLocaleString("tr-TR")} ₺
-                        </div>
-
-                        <div class="badges">
-
-                            ${
-                                product.active
-                                ? `<span class="badge badge-active">AKTİF</span>`
-                                : `<span class="badge badge-passive">PASİF</span>`
-                            }
-
-                            ${
-                                product.featured
-                                ? `<span class="badge badge-featured">ÖNE ÇIKAN</span>`
-                                : ""
-                            }
-
-                        </div>
-
-                    </div>
-
-                    <div class="actions">
-
-                        <button
-                            class="btn-edit"
-                            onclick="editProduct(${product.id})">
-                            Düzenle
-                        </button>
-
-                        <button
-                            class="btn-toggle"
-                            onclick="toggleActive(${product.id})">
-                            ${product.active ? "Pasif Yap" : "Aktif Yap"}
-                        </button>
-
-                        <button
-                            class="btn-delete"
-                            onclick="deleteProduct(${product.id})">
-                            Sil
-                        </button>
-
-                    </div>
-
-                </div>
-            `;
-
-        }).join("");
+                }
+            ).join("");
 
     }
 
 
-    // Yeni ürün
+    /* =========================================================
+       ADD PRODUCT
+    ========================================================= */
+
     function openAddModal() {
 
-        document.getElementById("modalTitle").textContent =
+        document.getElementById(
+            "modalTitle"
+        ).textContent =
             "Yeni Ürün";
 
-        document.getElementById("productId").value = "";
-        document.getElementById("productName").value = "";
-        document.getElementById("productCategory").value = "";
-        document.getElementById("productDescription").value = "";
-        document.getElementById("productPrice").value = "";
-        document.getElementById("productImage").value = "";
-        document.getElementById("productActive").checked = true;
-        document.getElementById("productFeatured").checked = false;
 
-        document.getElementById("productModal").style.display = "block";
+        document.getElementById(
+            "productId"
+        ).value = "";
+
+
+        document.getElementById(
+            "productName"
+        ).value = "";
+
+
+        document.getElementById(
+            "productCategory"
+        ).value = "";
+
+
+        document.getElementById(
+            "productDescription"
+        ).value = "";
+
+
+        document.getElementById(
+            "productPrice"
+        ).value = "";
+
+
+        document.getElementById(
+            "productActive"
+        ).checked = true;
+
+
+        document.getElementById(
+            "productFeatured"
+        ).checked = false;
+
+
+        selectedImage = "";
+
+
+        document.getElementById(
+            "currentImagePreview"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "selectedImagePath"
+        ).textContent =
+            "Henüz görsel seçilmedi.";
+
+
+        renderImageGallery();
+
+
+        document.getElementById(
+            "productModal"
+        ).style.display =
+            "block";
 
     }
 
 
-    // Ürün düzenleme
+    /* =========================================================
+       EDIT PRODUCT
+    ========================================================= */
+
     function editProduct(id) {
 
-        const product = products.find(p => p.id === id);
+        const product =
+            products.find(
+                p => p.id === id
+            );
+
 
         if (!product) return;
 
-        document.getElementById("modalTitle").textContent =
+
+        document.getElementById(
+            "modalTitle"
+        ).textContent =
             "Ürün Düzenle";
 
-        document.getElementById("productId").value = product.id;
-        document.getElementById("productName").value = product.name;
-        document.getElementById("productCategory").value = product.category;
-        document.getElementById("productDescription").value =
+
+        document.getElementById(
+            "productId"
+        ).value =
+            product.id;
+
+
+        document.getElementById(
+            "productName"
+        ).value =
+            product.name;
+
+
+        document.getElementById(
+            "productCategory"
+        ).value =
+            product.category;
+
+
+        document.getElementById(
+            "productDescription"
+        ).value =
             product.description;
-        document.getElementById("productPrice").value = product.price;
-        document.getElementById("productImage").value = product.image;
-        document.getElementById("productActive").checked =
+
+
+        document.getElementById(
+            "productPrice"
+        ).value =
+            product.price;
+
+
+        document.getElementById(
+            "productActive"
+        ).checked =
             product.active;
-        document.getElementById("productFeatured").checked =
+
+
+        document.getElementById(
+            "productFeatured"
+        ).checked =
             product.featured;
 
-        document.getElementById("productModal").style.display = "block";
+
+        selectedImage =
+            product.image || "";
+
+
+        updateCurrentImage();
+
+
+        renderImageGallery();
+
+
+        document.getElementById(
+            "productModal"
+        ).style.display =
+            "block";
 
     }
 
 
-    // Kaydet
+    /* =========================================================
+       CURRENT IMAGE
+    ========================================================= */
+
+    function updateCurrentImage() {
+
+        const preview =
+            document.getElementById(
+                "currentImagePreview"
+            );
+
+
+        const path =
+            document.getElementById(
+                "selectedImagePath"
+            );
+
+
+        if (!selectedImage) {
+
+            preview.style.display =
+                "none";
+
+
+            path.textContent =
+                "Henüz görsel seçilmedi.";
+
+
+            return;
+
+        }
+
+
+        preview.src =
+            selectedImage.startsWith(
+                "http"
+            )
+                ? selectedImage
+                : selectedImage;
+
+
+        preview.style.display =
+            "block";
+
+
+        path.textContent =
+            selectedImage;
+
+    }
+
+
+    /* =========================================================
+       SAVE PRODUCT
+    ========================================================= */
+
     function saveProduct() {
 
         const idValue =
-            document.getElementById("productId").value;
+            document.getElementById(
+                "productId"
+            ).value;
+
 
         const name =
-            document.getElementById("productName").value.trim();
+            document.getElementById(
+                "productName"
+            ).value.trim();
+
 
         const category =
-            document.getElementById("productCategory").value.trim();
+            document.getElementById(
+                "productCategory"
+            ).value.trim();
+
 
         const description =
-            document.getElementById("productDescription").value.trim();
+            document.getElementById(
+                "productDescription"
+            ).value.trim();
+
 
         const price =
-            Number(document.getElementById("productPrice").value);
+            Number(
+                document.getElementById(
+                    "productPrice"
+                ).value
+            );
 
-        const image =
-            document.getElementById("productImage").value.trim();
 
         const active =
-            document.getElementById("productActive").checked;
+            document.getElementById(
+                "productActive"
+            ).checked;
+
 
         const featured =
-            document.getElementById("productFeatured").checked;
+            document.getElementById(
+                "productFeatured"
+            ).checked;
 
 
         if (!name) {
-            alert("Ürün adı gir.");
+
+            alert(
+                "Ürün adı gir."
+            );
+
             return;
+
         }
+
 
         if (!category) {
-            alert("Kategori gir.");
+
+            alert(
+                "Kategori gir."
+            );
+
             return;
+
         }
 
-        if (isNaN(price) || price < 0) {
-            alert("Geçerli bir fiyat gir.");
+
+        if (
+            isNaN(price) ||
+            price < 0
+        ) {
+
+            alert(
+                "Geçerli bir fiyat gir."
+            );
+
             return;
+
+        }
+
+
+        if (!selectedImage) {
+
+            const continueWithoutImage =
+                confirm(
+                    "Bu ürün için görsel seçmedin. Yine de kaydetmek istiyor musun?"
+                );
+
+
+            if (!continueWithoutImage) {
+
+                return;
+
+            }
+
         }
 
 
         if (idValue) {
 
-            // Mevcut ürün
-            const id = Number(idValue);
+            const id =
+                Number(idValue);
 
-            const product = products.find(p => p.id === id);
+
+            const product =
+                products.find(
+                    p => p.id === id
+                );
+
 
             if (product) {
 
-                product.name = name;
-                product.category = category;
-                product.description = description;
-                product.price = price;
-                product.image = image;
-                product.active = active;
-                product.featured = featured;
+                product.name =
+                    name;
+
+                product.category =
+                    category;
+
+                product.description =
+                    description;
+
+                product.price =
+                    price;
+
+                product.image =
+                    selectedImage;
+
+                product.active =
+                    active;
+
+                product.featured =
+                    featured;
 
             }
 
         } else {
 
-            // Yeni ID
+
             const newId =
                 products.length > 0
-                    ? Math.max(...products.map(p => Number(p.id))) + 1
+
+                    ? Math.max(
+                        ...products.map(
+                            p => Number(p.id)
+                        )
+                    ) + 1
+
                     : 1;
+
 
             products.push({
 
                 id: newId,
+
                 name: name,
+
                 category: category,
-                description: description,
+
+                description:
+                    description,
+
                 price: price,
-                image: image,
+
+                image:
+                    selectedImage,
+
                 active: active,
-                featured: featured
+
+                featured:
+                    featured
 
             });
 
@@ -642,111 +1671,252 @@
 
 
         closeModal();
+
+
         renderProducts();
 
     }
 
 
-    // Aktif / pasif
+    /* =========================================================
+       TOGGLE ACTIVE
+    ========================================================= */
+
     function toggleActive(id) {
 
-        const product = products.find(p => p.id === id);
+        const product =
+            products.find(
+                p => p.id === id
+            );
+
 
         if (!product) return;
 
-        product.active = !product.active;
+
+        product.active =
+            !product.active;
+
 
         renderProducts();
 
     }
 
 
-    // Sil
+    /* =========================================================
+       DELETE PRODUCT
+    ========================================================= */
+
     function deleteProduct(id) {
 
-        const product = products.find(p => p.id === id);
+        const product =
+            products.find(
+                p => p.id === id
+            );
+
 
         if (!product) return;
 
-        const confirmed = confirm(
-            `"${product.name}" ürününü silmek istediğine emin misin?`
-        );
+
+        const confirmed =
+            confirm(
+                `"${product.name}" ürününü silmek istediğine emin misin?`
+            );
+
 
         if (!confirmed) return;
 
-        products = products.filter(p => p.id !== id);
+
+        products =
+            products.filter(
+                p => p.id !== id
+            );
+
 
         renderProducts();
 
     }
 
 
-    // Modal kapat
+    /* =========================================================
+       CLOSE MODAL
+    ========================================================= */
+
     function closeModal() {
 
-        document.getElementById("productModal").style.display =
+        document.getElementById(
+            "productModal"
+        ).style.display =
             "none";
 
     }
 
 
-    // JSON indir
+    /* =========================================================
+       DOWNLOAD JSON
+    ========================================================= */
+
     function downloadJSON() {
 
-        const json = JSON.stringify(products, null, 4);
+        const json =
+            JSON.stringify(
+                products,
+                null,
+                4
+            );
 
-        const blob = new Blob(
-            [json],
-            { type: "application/json" }
+
+        const blob =
+            new Blob(
+                [json],
+                {
+                    type:
+                        "application/json"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const a =
+            document.createElement(
+                "a"
+            );
+
+
+        a.href =
+            url;
+
+
+        a.download =
+            "products.json";
+
+
+        document.body.appendChild(
+            a
         );
 
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-
-        a.href = url;
-        a.download = "products.json";
-
-        document.body.appendChild(a);
 
         a.click();
 
-        document.body.removeChild(a);
 
-        URL.revokeObjectURL(url);
+        document.body.removeChild(
+            a
+        );
+
+
+        URL.revokeObjectURL(
+            url
+        );
 
     }
 
 
-    // HTML güvenliği
+    /* =========================================================
+       ESCAPE HTML
+    ========================================================= */
+
     function escapeHtml(value) {
 
-        return String(value ?? "")
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
+        return String(
+            value ?? ""
+        )
+
+            .replaceAll(
+                "&",
+                "&amp;"
+            )
+
+            .replaceAll(
+                "<",
+                "&lt;"
+            )
+
+            .replaceAll(
+                ">",
+                "&gt;"
+            )
+
+            .replaceAll(
+                '"',
+                "&quot;"
+            )
+
+            .replaceAll(
+                "'",
+                "&#039;"
+            );
 
     }
 
 
-    // Modal dışına tıklayınca kapat
-    window.onclick = function(event) {
+    /* =========================================================
+       ESCAPE JAVASCRIPT
+    ========================================================= */
 
-        const modal =
-            document.getElementById("productModal");
+    function escapeJs(value) {
 
-        if (event.target === modal) {
-            closeModal();
-        }
+        return String(
+            value ?? ""
+        )
+            .replaceAll(
+                "\\",
+                "\\\\"
+            )
+            .replaceAll(
+                "'",
+                "\\'"
+            )
+            .replaceAll(
+                "\n",
+                "\\n"
+            )
+            .replaceAll(
+                "\r",
+                "\\r"
+            );
 
-    };
+    }
 
+
+    /* =========================================================
+       OUTSIDE CLICK
+    ========================================================= */
+
+    window.onclick =
+        function(event) {
+
+            const modal =
+                document.getElementById(
+                    "productModal"
+                );
+
+
+            if (
+                event.target ===
+                modal
+            ) {
+
+                closeModal();
+
+            }
+
+        };
+
+
+    /* =========================================================
+       START
+    ========================================================= */
 
     loadProducts();
 
+    loadImages();
+
 </script>
+
 
 </body>
 </html>
