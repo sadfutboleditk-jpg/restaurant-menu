@@ -65,7 +65,7 @@
         "category": "Burger",
         "description": "specialll",
         "price": 41,
-        "image": "www.google.com",
+        "image": "images/yemek2.jpg",
         "active": true,
         "featured": false
     }
